@@ -8,6 +8,8 @@ import Catalogue from "@/pages/Catalogue";
 import ProductDetail from "@/pages/ProductDetail";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { FavoritesProvider } from "@/context/FavoritesContext";
 
 function Router() {
   return (
@@ -23,14 +25,18 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-grow">
-          <Router />
-        </main>
-        <Footer />
-      </div>
-      <Toaster />
+      <ThemeProvider>
+        <FavoritesProvider>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow">
+              <Router />
+            </main>
+            <Footer />
+          </div>
+          <Toaster />
+        </FavoritesProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
