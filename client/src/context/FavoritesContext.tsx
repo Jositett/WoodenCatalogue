@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Door } from '@shared/schema';
 import { useQuery } from '@tanstack/react-query';
+import { Door } from '@shared/schema';
 
 interface FavoritesContextType {
   favorites: Door[];
@@ -13,26 +13,40 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(undefin
 
 export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
+  const [favorites, setFavorites] = useState<Door[]>([]);
   
-  // Load favorite IDs from localStorage on mount
-  useEffect(() => {
-    const savedFavorites = localStorage.getItem('favorites');
-    if (savedFavorites) {
-      setFavoriteIds(JSON.parse(savedFavorites));
-    }
-  }, []);
-  
-  // Save favorite IDs to localStorage when they change
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favoriteIds));
-  }, [favoriteIds]);
-  
-  // Fetch all doors to get the full details for favorites
-  const { data: doors = [] } = useQuery<Door[]>({
+  // Get all doors for reference when adding favorites
+  const { data: doors } = useQuery<Door[]>({
     queryKey: ['/api/doors'],
   });
   
-  const favorites = doors.filter(door => favoriteIds.includes(door.id));
+  // Load favorite IDs from localStorage on initial render
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) {
+      try {
+        const parsed = JSON.parse(savedFavorites);
+        if (Array.isArray(parsed)) {
+          setFavoriteIds(parsed);
+        }
+      } catch (error) {
+        console.error('Failed to parse favorites from localStorage', error);
+      }
+    }
+  }, []);
+  
+  // Update favorites whenever favoriteIds or doors changes
+  useEffect(() => {
+    if (doors) {
+      const favoriteItems = doors.filter(door => favoriteIds.includes(door.id));
+      setFavorites(favoriteItems);
+    }
+  }, [favoriteIds, doors]);
+  
+  // Save favoriteIds to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favoriteIds));
+  }, [favoriteIds]);
   
   const addFavorite = (doorId: number) => {
     setFavoriteIds(prev => {
@@ -51,8 +65,15 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     return favoriteIds.includes(doorId);
   };
   
+  const value = {
+    favorites,
+    addFavorite,
+    removeFavorite,
+    isFavorite
+  };
+  
   return (
-    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, isFavorite }}>
+    <FavoritesContext.Provider value={value}>
       {children}
     </FavoritesContext.Provider>
   );
@@ -65,5 +86,3 @@ export const useFavorites = () => {
   }
   return context;
 };
-
-export default FavoritesContext;
