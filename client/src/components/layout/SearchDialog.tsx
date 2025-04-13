@@ -55,13 +55,13 @@ const SearchDialog: React.FC<SearchDialogProps> = ({ open, onOpenChange }) => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim() && searchResults.length > 0) {
-      navigate(`/product/${searchResults[0].id}`);
+      setLocation(`/product/${searchResults[0].id}`);
       onOpenChange(false);
     }
   };
   
   const handleResultClick = (doorId: number) => {
-    navigate(`/product/${doorId}`);
+    setLocation(`/product/${doorId}`);
     onOpenChange(false);
   };
   
@@ -136,7 +136,10 @@ const SearchDialog: React.FC<SearchDialogProps> = ({ open, onOpenChange }) => {
               
               {searchResults.length > 5 && (
                 <Button
-                  onClick={() => navigate('/catalogue')}
+                  onClick={() => {
+                    setLocation('/catalogue');
+                    onOpenChange(false);
+                  }}
                   variant="link"
                   className="mt-4 text-[#7D5A50] dark:text-amber-400 hover:text-[#5C4033] dark:hover:text-amber-300"
                 >
