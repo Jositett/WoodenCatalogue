@@ -7,13 +7,14 @@ import ContactForm from '@/components/home/ContactForm';
 import CTAs from '@/components/home/CTAs';
 import About from '@/components/home/About';
 import { useQuery } from '@tanstack/react-query';
+import { Collection, Testimonial } from '@shared/schema';
 
 const Home: React.FC = () => {
-  const { data: collectionsData, isLoading: collectionsLoading } = useQuery({
+  const { data: collectionsData, isLoading: collectionsLoading } = useQuery<Collection[]>({
     queryKey: ['/api/collections'],
   });
 
-  const { data: testimonialsData, isLoading: testimonialsLoading } = useQuery({
+  const { data: testimonialsData, isLoading: testimonialsLoading } = useQuery<Testimonial[]>({
     queryKey: ['/api/testimonials'],
   });
 

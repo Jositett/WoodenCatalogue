@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -72,6 +73,9 @@ const SearchDialog: React.FC<SearchDialogProps> = ({ open, onOpenChange }) => {
           <DialogTitle className="text-2xl font-playfair text-[#5C4033] dark:text-amber-200">
             Search Doors
           </DialogTitle>
+          <DialogDescription className="text-gray-600 dark:text-gray-300">
+            Find your perfect door by name, wood type, style, or origin
+          </DialogDescription>
         </DialogHeader>
         
         <form onSubmit={handleSearch} className="mt-4">
