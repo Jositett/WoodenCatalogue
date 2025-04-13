@@ -11,12 +11,12 @@ interface CTAItemProps {
 const CTAItem: React.FC<CTAItemProps> = ({ icon, text, href }) => {
   return (
     <Link href={href}>
-      <a className="flex items-center px-6 py-4 bg-white rounded-sm shadow-sm hover:shadow-md transition-all duration-300">
+      <div className="flex items-center px-6 py-4 bg-white rounded-sm shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
         <div className="text-[#D4B483] mr-4">
           {icon}
         </div>
         <span className="text-[#5C4033] font-medium">{text}</span>
-      </a>
+      </div>
     </Link>
   );
 };

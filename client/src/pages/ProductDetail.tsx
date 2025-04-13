@@ -129,7 +129,7 @@ const ProductDetail: React.FC = () => {
             <div className="border-t border-b border-gray-200 py-6 mb-6">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-[#5C4033] font-medium">Price</span>
-                <span className="text-xl font-playfair">From ${product.price.toLocaleString()}</span>
+                <span className="text-xl font-playfair">From ${product.price ? product.price.toLocaleString() : '0'}</span>
               </div>
               
               <div className="grid grid-cols-2 gap-4 mb-6">
@@ -152,7 +152,7 @@ const ProductDetail: React.FC = () => {
               </div>
               
               <div className="flex flex-wrap gap-2 mb-4">
-                {product.features.map((feature, index) => (
+                {product.features && product.features.map((feature, index) => (
                   <div key={index} className="flex items-center text-gray-700 text-sm">
                     <Check className="h-4 w-4 text-[#7D5A50] mr-1" />
                     {feature}

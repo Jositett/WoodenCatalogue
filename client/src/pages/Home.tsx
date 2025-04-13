@@ -5,6 +5,7 @@ import FeaturedCollections from '@/components/home/FeaturedCollections';
 import Testimonials from '@/components/home/Testimonials';
 import ContactForm from '@/components/home/ContactForm';
 import CTAs from '@/components/home/CTAs';
+import About from '@/components/home/About';
 import { useQuery } from '@tanstack/react-query';
 
 const Home: React.FC = () => {
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
         collections={collectionsData || []} 
         isLoading={collectionsLoading} 
       />
+      <About />
       <Testimonials 
         testimonials={testimonialsData || []} 
         isLoading={testimonialsLoading} 
