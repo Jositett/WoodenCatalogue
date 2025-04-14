@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Database } from '@/types/supabase';
 
 if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-  console.error('Missing Supabase environment variables');
+  console.error('Missing Supabase environment variables. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your Secrets.');
 }
 
 export const supabase = createClient<Database>(
@@ -14,11 +14,6 @@ export const supabase = createClient<Database>(
       persistSession: true,
       detectSessionInUrl: true
     },
-    global: {
-      headers: {
-        'x-application-name': 'luxe-doors'
-      }
-    }
   }
 );
 
