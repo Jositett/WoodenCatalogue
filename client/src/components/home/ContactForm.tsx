@@ -72,13 +72,13 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#7D5A50]">
+    <section id="contact" className="py-24 bg-[#7D5A50] dark:bg-gray-950">
       <div className="container mx-auto px-4 md:px-0">
-        <div className="bg-white rounded-sm overflow-hidden shadow-xl max-w-5xl mx-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-sm overflow-hidden shadow-xl max-w-5xl mx-auto">
           <div className="md:flex">
             <div className="md:w-1/2 p-8 md:p-12">
-              <h2 className="font-playfair text-3xl text-[#5C4033] mb-6">Request Your Personal Consultation</h2>
-              <p className="mb-8 text-gray-600">Let our experts guide you through selecting the perfect door for your space.</p>
+              <h2 className="font-playfair text-3xl text-[#5C4033] dark:text-amber-200 mb-6">Request Your Personal Consultation</h2>
+              <p className="mb-8 text-gray-600 dark:text-gray-300">Let our experts guide you through selecting the perfect door for your space.</p>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -87,7 +87,7 @@ const ContactForm: React.FC = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700">Name</FormLabel>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Name</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Your name" 
@@ -105,7 +105,7 @@ const ContactForm: React.FC = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700">Email</FormLabel>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Email</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Your email" 
@@ -124,7 +124,7 @@ const ContactForm: React.FC = () => {
                     name="phone"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700">Phone</FormLabel>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Phone</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Your phone number" 
@@ -143,7 +143,7 @@ const ContactForm: React.FC = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700">Project Requirements</FormLabel>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Project Requirements</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Tell us about your project" 
