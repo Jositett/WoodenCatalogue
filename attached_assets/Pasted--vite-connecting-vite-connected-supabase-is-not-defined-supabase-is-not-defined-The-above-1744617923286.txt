@@ -1,0 +1,37 @@
+[vite] connecting...
+[vite] connected.
+supabase is not defined
+supabase is not defined
+The above error occurred in the <Route> component:
+
+    at Route (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=b5c69a86:323:16)
+    at Switch (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=b5c69a86:379:17)
+    at Router
+    at main
+    at div
+    at FavoritesProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/context/FavoritesContext.tsx:21:37)
+    at ThemeProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/context/ThemeContext.tsx:20:33)
+    at QueryClientProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=b5c69a86:2805:3)
+    at App
+    at ErrorBoundary (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/components/ErrorBoundary.tsx:7:5)
+    at AppWithBoundary
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
+
+at Route (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=b5c69a86:323:16)
+at Switch (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=b5c69a86:379:17)
+at Router
+at main
+at div
+at FavoritesProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/context/FavoritesContext.tsx:21:37)
+at ThemeProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/context/ThemeContext.tsx:20:33)
+at QueryClientProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=b5c69a86:2805:3)
+at App
+at ErrorBoundary (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/components/ErrorBoundary.tsx:7:5)
+at AppWithBoundary
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
+at t.value (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
