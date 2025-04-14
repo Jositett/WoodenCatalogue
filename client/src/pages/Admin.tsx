@@ -53,63 +53,81 @@ const Admin = () => {
   };
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-8">Database Management</h1>
-      
-      <Tabs defaultValue="view">
-        <TabsList>
-          <TabsTrigger value="view">View Data</TabsTrigger>
-          <TabsTrigger value="create">Create New</TabsTrigger>
-        </TabsList>
+    <div className="min-h-screen bg-[#F7F3E9] dark:bg-gray-900 py-12">
+      <div className="container mx-auto px-4">
+        <h1 className="font-playfair text-3xl md:text-4xl text-[#7D5A50] dark:text-amber-300 font-bold mb-8">
+          Database Management
+        </h1>
         
-        <TabsContent value="view">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Price</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {doors.map((door) => (
-                <TableRow key={door.id}>
-                  <TableCell>{door.id}</TableCell>
-                  <TableCell>{door.name}</TableCell>
-                  <TableCell>${door.price}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => deleteDoor(door.id)}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TabsContent>
-        
-        <TabsContent value="create">
-          <div className="space-y-4">
-            <Input
-              placeholder="Door Name"
-              value={newDoor.name || ''}
-              onChange={(e) => setNewDoor({ ...newDoor, name: e.target.value })}
-            />
-            <Input
-              type="number"
-              placeholder="Price"
-              value={newDoor.price || ''}
-              onChange={(e) => setNewDoor({ ...newDoor, price: Number(e.target.value) })}
-            />
-            <Button onClick={createDoor}>Create Door</Button>
-          </div>
-        </TabsContent>
-      </Tabs>
+        <Card className="bg-white dark:bg-gray-800 shadow-md">
+          <CardContent className="p-6">
+            <Tabs defaultValue="view" className="space-y-6">
+              <TabsList className="bg-[#E8E4DA] dark:bg-gray-700">
+                <TabsTrigger value="view" className="text-[#5C4033] dark:text-amber-100">View Data</TabsTrigger>
+                <TabsTrigger value="create" className="text-[#5C4033] dark:text-amber-100">Create New</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="view">
+                <div className="rounded-sm overflow-hidden">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="bg-[#E8E4DA] dark:bg-gray-700">
+                        <TableHead className="text-[#5C4033] dark:text-amber-200">ID</TableHead>
+                        <TableHead className="text-[#5C4033] dark:text-amber-200">Name</TableHead>
+                        <TableHead className="text-[#5C4033] dark:text-amber-200">Price</TableHead>
+                        <TableHead className="text-[#5C4033] dark:text-amber-200">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {doors.map((door) => (
+                        <TableRow key={door.id} className="border-b border-[#E8E4DA] dark:border-gray-700">
+                          <TableCell className="text-[#5C4033] dark:text-gray-300">{door.id}</TableCell>
+                          <TableCell className="text-[#5C4033] dark:text-gray-300">{door.name}</TableCell>
+                          <TableCell className="text-[#5C4033] dark:text-gray-300">${door.price.toLocaleString()}</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => deleteDoor(door.id)}
+                              className="bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
+                            >
+                              Delete
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="create">
+                <div className="space-y-4 max-w-md">
+                  <Input
+                    placeholder="Door Name"
+                    value={newDoor.name || ''}
+                    onChange={(e) => setNewDoor({ ...newDoor, name: e.target.value })}
+                    className="border-[#D4B483] dark:border-gray-600 focus-visible:ring-[#7D5A50] dark:focus-visible:ring-amber-500"
+                  />
+                  <Input
+                    type="number"
+                    placeholder="Price"
+                    value={newDoor.price || ''}
+                    onChange={(e) => setNewDoor({ ...newDoor, price: Number(e.target.value) })}
+                    className="border-[#D4B483] dark:border-gray-600 focus-visible:ring-[#7D5A50] dark:focus-visible:ring-amber-500"
+                  />
+                  <Button 
+                    onClick={createDoor}
+                    className="bg-[#7D5A50] hover:bg-[#5C4033] dark:bg-amber-600 dark:hover:bg-amber-700 text-white w-full"
+                  >
+                    Create Door
+                  </Button>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
