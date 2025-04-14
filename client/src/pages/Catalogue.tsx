@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Skeleton } from '@/components/ui/skeleton';
 import Filters from '@/components/catalogue/Filters';
@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Door } from '@shared/schema';
 
 const Catalogue: React.FC = () => {
+  const catalogueRef = useRef<HTMLDivElement>(null);
+  
   const [filters, setFilters] = useState({
     style: 'all',
     woodType: 'all',
@@ -21,6 +23,11 @@ const Catalogue: React.FC = () => {
   
   const [filteredProducts, setFilteredProducts] = useState<Door[]>([]);
   const [visibleProducts, setVisibleProducts] = useState<number>(6);
+  
+  // Scroll to top of catalogue when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   useEffect(() => {
     if (products) {
@@ -57,7 +64,7 @@ const Catalogue: React.FC = () => {
   };
 
   return (
-    <section id="catalogue" className="py-24 bg-[#F7F3E9] dark:bg-gray-900">
+    <section ref={catalogueRef} id="catalogue" className="py-24 bg-[#F7F3E9] dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <h2 className="font-playfair text-4xl text-center text-[#5C4033] dark:text-amber-200 mb-6">Door Catalogue</h2>
         <p className="text-center text-lg mb-16 max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
