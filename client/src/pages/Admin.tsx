@@ -1,81 +1,93 @@
+
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import type { Door } from '@shared/schema';
 
 const Admin = () => {
+  const [, setLocation] = useLocation();
   const [doors, setDoors] = useState<Door[]>([]);
   const [newDoor, setNewDoor] = useState<Partial<Door>>({});
-  const [error, setError] = useState<string | null>(null); // Added error state
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    checkUser();
     fetchDoors();
   }, []);
 
+  const checkUser = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      setLocation('/login');
+    }
+  };
+
   const fetchDoors = async () => {
-    setError(null); // Clear any previous errors
+    setError(null);
     try {
       const { data, error } = await supabase.from('doors').select('*');
       if (error) {
-        setError(error.message); // Set error message from Supabase error
+        setError(error.message);
         console.error('Error fetching doors:', error);
         return;
       }
       setDoors(data);
     } catch (error) {
-      setError('An unexpected error occurred while fetching doors.'); // Generic error message
+      setError('An unexpected error occurred while fetching doors.');
       console.error('Error fetching doors:', error);
     }
   };
 
   const createDoor = async () => {
-    setError(null); // Clear any previous errors
+    setError(null);
     try {
       const { error } = await supabase.from('doors').insert([newDoor]);
       if (error) {
-        setError(error.message); // Set error message from Supabase error
+        setError(error.message);
         console.error('Error creating door:', error);
         return;
       }
       fetchDoors();
       setNewDoor({});
     } catch (error) {
-      setError('An unexpected error occurred while creating a door.'); // Generic error message
+      setError('An unexpected error occurred while creating a door.');
       console.error('Error creating door:', error);
     }
   };
 
   const updateDoor = async (id: number, updates: Partial<Door>) => {
-    setError(null); // Clear any previous errors
+    setError(null);
     try {
       const { error } = await supabase.from('doors').update(updates).eq('id', id);
       if (error) {
-        setError(error.message); // Set error message from Supabase error
+        setError(error.message);
         console.error('Error updating door:', error);
         return;
       }
       fetchDoors();
     } catch (error) {
-      setError('An unexpected error occurred while updating a door.'); // Generic error message
+      setError('An unexpected error occurred while updating a door.');
       console.error('Error updating door:', error);
     }
   };
 
   const deleteDoor = async (id: number) => {
-    setError(null); // Clear any previous errors
+    setError(null);
     try {
       const { error } = await supabase.from('doors').delete().eq('id', id);
       if (error) {
-        setError(error.message); // Set error message from Supabase error
+        setError(error.message);
         console.error('Error deleting door:', error);
         return;
       }
       fetchDoors();
     } catch (error) {
-      setError('An unexpected error occurred while deleting a door.'); // Generic error message
+      setError('An unexpected error occurred while deleting a door.');
       console.error('Error deleting door:', error);
     }
   };
@@ -127,7 +139,7 @@ const Admin = () => {
                     </TableBody>
                   </Table>
                 </div>
-                {error && <p className="text-red-500 mt-4">{error}</p>} {/* Display error message */}
+                {error && <p className="text-red-500 mt-4">{error}</p>}
               </TabsContent>
 
               <TabsContent value="create">
@@ -152,7 +164,7 @@ const Admin = () => {
                     Create Door
                   </Button>
                 </div>
-                {error && <p className="text-red-500 mt-4">{error}</p>} {/* Display error message */}
+                {error && <p className="text-red-500 mt-4">{error}</p>}
               </TabsContent>
             </Tabs>
           </CardContent>

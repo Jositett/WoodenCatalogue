@@ -25,12 +25,14 @@ export default function Login() {
       return;
     }
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
       if (error) throw error;
-      setLocation('/admin');
+      if (data.session) {
+        setLocation('/admin');
+      }
     } catch (err: any) {
       setError(err.message);
     }
