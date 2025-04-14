@@ -5,36 +5,44 @@ import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Login() {
   const [, setLocation] = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     
-    if (!email || !password) {
-      setError('Please fill in all fields');
-      return;
-    }
-
-    if (!email.includes('@')) {
-      setError('Please enter a valid email');
-      return;
-    }
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const { data: { session }, error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password: password.trim(),
       });
-      if (error) throw error;
-      if (data.session) {
+
+      if (error) {
+        throw error;
+      }
+
+      if (session) {
+        toast({
+          title: "Success",
+          description: "Logged in successfully",
+        });
         setLocation('/admin');
       }
     } catch (err: any) {
-      setError(err.message);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: err.message || "Failed to login",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,6 +63,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                disabled={loading}
                 className="border-[#D4B483] dark:border-gray-600 focus-visible:ring-[#7D5A50] dark:focus-visible:ring-amber-500"
               />
             </div>
@@ -65,15 +74,16 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                disabled={loading}
                 className="border-[#D4B483] dark:border-gray-600 focus-visible:ring-[#7D5A50] dark:focus-visible:ring-amber-500"
               />
             </div>
-            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             <Button 
               type="submit" 
+              disabled={loading}
               className="w-full bg-[#7D5A50] hover:bg-[#5C4033] dark:bg-amber-600 dark:hover:bg-amber-700 text-white"
             >
-              Login
+              {loading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
         </CardContent>
