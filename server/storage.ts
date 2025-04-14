@@ -54,7 +54,7 @@ export class MemStorage implements IStorage {
   private collectionIdCounter: number;
   private testimonialIdCounter: number;
   private contactSubmissionIdCounter: number;
-
+  
   constructor() {
     this.users = new Map();
     this.doors = new Map();
@@ -307,27 +307,49 @@ export class MemStorage implements IStorage {
 }
 
 import { supabase } from './supabase';
+import type { Door, Collection, Testimonial } from '@shared/schema';
 
 export const storage = {
-  // Example function to get doors from Supabase
   async getDoors() {
     const { data, error } = await supabase
       .from('doors')
       .select('*');
-    
+
     if (error) throw error;
     return data;
   },
-  
-  // Example function to get a single door
-  async getDoor(id: string) {
+
+  async getDoorById(id: number) {
     const { data, error } = await supabase
       .from('doors')
       .select('*')
       .eq('id', id)
       .single();
-    
+
+    if (error) throw error;
+    return data;
+  },
+
+  async getCollections(featuredOnly = false) {
+    const query = supabase
+      .from('collections')
+      .select('*');
+
+    if (featuredOnly) {
+      query.eq('featured', true);
+    }
+
+    const { data, error } = await query;
+    if (error) throw error;
+    return data;
+  },
+
+  async getTestimonials() {
+    const { data, error } = await supabase
+      .from('testimonials')
+      .select('*');
+
     if (error) throw error;
     return data;
   }
-};;
+};
