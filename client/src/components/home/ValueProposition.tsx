@@ -11,12 +11,12 @@ const Feature: React.FC<FeatureProps> = ({ icon, title, description }) => {
   return (
     <div className="feature text-center px-6 py-8 transition-all duration-300 ease-in-out">
       <div className="mb-6 flex justify-center">
-        <div className="text-[#D4B483] transform transition-transform duration-300 hover:scale-110">
+        <div className="text-[#D4B483] dark:text-amber-500 transform transition-transform duration-300 hover:scale-110">
           {icon}
         </div>
       </div>
-      <h3 className="font-playfair text-xl mb-3 text-[#7D5A50]">{title}</h3>
-      <p className="text-[#333333] text-sm leading-relaxed">{description}</p>
+      <h3 className="font-playfair text-xl mb-3 text-[#7D5A50] dark:text-amber-200">{title}</h3>
+      <p className="text-[#333333] dark:text-gray-300 text-sm leading-relaxed">{description}</p>
     </div>
   );
 };
@@ -46,9 +46,9 @@ const ValueProposition: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
-        <h2 className="font-playfair text-4xl text-center text-[#5C4033] mb-16">Why Choose Our Doors?</h2>
+        <h2 className="font-playfair text-4xl text-center text-[#5C4033] dark:text-amber-200 mb-16">Why Choose Our Doors?</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
           {features.map((feature, index) => (
