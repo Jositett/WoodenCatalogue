@@ -1,0 +1,33 @@
+[vite] connecting...
+[vite] connected.
+Login is not defined
+Login is not defined
+The above error occurred in the <Router> component:
+
+    at Router (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/App.tsx?v=Ljztpmfk7u23v4rZ3your:60:147)
+    at main
+    at div
+    at FavoritesProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/context/FavoritesContext.tsx:21:37)
+    at ThemeProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/context/ThemeContext.tsx:20:33)
+    at QueryClientProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=b5c69a86:2805:3)
+    at App
+    at ErrorBoundary (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/components/ErrorBoundary.tsx:7:5)
+    at AppWithBoundary
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
+
+at Router (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/App.tsx?v=Ljztpmfk7u23v4rZ3your:60:147)
+at main
+at div
+at FavoritesProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/context/FavoritesContext.tsx:21:37)
+at ThemeProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/context/ThemeContext.tsx:20:33)
+at QueryClientProvider (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=b5c69a86:2805:3)
+at App
+at ErrorBoundary (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/src/components/ErrorBoundary.tsx:7:5)
+at AppWithBoundary
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
+at t.value (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://981fb896-789f-4ef3-9d0c-ee964d881df3-00-2hubzub2m8ar2.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
