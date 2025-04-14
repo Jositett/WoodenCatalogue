@@ -306,4 +306,28 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+import { supabase } from './supabase';
+
+export const storage = {
+  // Example function to get doors from Supabase
+  async getDoors() {
+    const { data, error } = await supabase
+      .from('doors')
+      .select('*');
+    
+    if (error) throw error;
+    return data;
+  },
+  
+  // Example function to get a single door
+  async getDoor(id: string) {
+    const { data, error } = await supabase
+      .from('doors')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  }
+};;
