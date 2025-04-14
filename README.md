@@ -115,6 +115,54 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Backend Developer: [Name]
 - UI/UX Designer: [Name]
 
+## 📚 Managing the Catalogue
+
+To add new items to the catalogue, follow these steps:
+
+1. Navigate to `server/storage.ts`
+2. Locate the `initializeSampleData` method
+3. Add new door entries following this template:
+
+```typescript
+{
+  name: "Your Door Name",
+  description: "Detailed description of the door",
+  price: 4500, // Price in USD
+  priceCategory: "Premium", // Premium, Luxury, or Ultra-Luxury
+  woodType: "Wood Type",
+  style: "Door Style", // Contemporary, Classic, Mediterranean, Asian
+  origin: "Country of Origin",
+  dimensions: "36\" x 80\" x 2.25\"", // Width x Height x Thickness
+  imageUrl: "https://your-main-image-url.jpg",
+  additionalImages: [
+    "https://additional-image-1.jpg",
+    "https://additional-image-2.jpg"
+  ],
+  features: ["Feature 1", "Feature 2", "Feature 3"],
+  details: "Extended technical details and craftsmanship information"
+}
+```
+
+### Required Fields:
+- `name`: Product name (string)
+- `description`: Brief product description (string)
+- `price`: Price in USD (number)
+- `priceCategory`: Product tier (string)
+- `woodType`: Type of wood used (string)
+- `style`: Architectural style (string)
+- `origin`: Country of manufacture (string)
+- `dimensions`: Product dimensions (string)
+- `imageUrl`: Main product image URL (string)
+- `additionalImages`: Array of additional image URLs (string[])
+- `features`: Array of product features (string[])
+- `details`: Detailed product description (string)
+
+### Image Guidelines:
+- Main image: 800x1200px recommended
+- Additional images: At least 800px wide
+- Use high-quality, well-lit photographs
+- Include detail shots and different angles
+
 ## 📞 Support
 
 For support, please contact us at:
