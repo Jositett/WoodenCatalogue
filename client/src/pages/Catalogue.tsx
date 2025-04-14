@@ -17,9 +17,23 @@ const Catalogue: React.FC = () => {
     origin: 'all',
   });
 
-  const { data: products, isLoading } = useQuery<Door[]>({
+  const { data: products, isLoading, error } = useQuery<Door[]>({
     queryKey: ['/api/doors'],
+    retry: 2,
+    onError: (err) => {
+      console.error('Failed to fetch doors:', err);
+    }
   });
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F7F3E9] dark:bg-gray-900">
+        <div className="text-center text-[#7D5A50] dark:text-amber-300">
+          Failed to load products. Please try again later.
+        </div>
+      </div>
+    );
+  }
   
   const [filteredProducts, setFilteredProducts] = useState<Door[]>([]);
   const [visibleProducts, setVisibleProducts] = useState<number>(6);

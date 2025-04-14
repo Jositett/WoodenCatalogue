@@ -14,6 +14,16 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email || !password) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    if (!email.includes('@')) {
+      setError('Please enter a valid email');
+      return;
+    }
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,

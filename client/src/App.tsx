@@ -10,6 +10,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 function Router() {
   return (
@@ -47,4 +48,12 @@ function App() {
   );
 }
 
-export default App;
+export default function AppWithBoundary() {
+  return (
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  );
+}
+
+export default AppWithBoundary;
