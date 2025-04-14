@@ -37,6 +37,170 @@ The application will be available at `http://localhost:5000`
 
 ## 🛠️ Tech Stack
 
+
+
+## 🔐 Supabase Backend Setup
+
+### 1. Create a Supabase Project
+1. Go to [Supabase Dashboard](https://supabase.com)
+2. Create a new project
+3. Note down your project URL and anon/public key
+
+### 2. Set Up Environment Variables
+You'll need to set these environment variables in your Replit:
+- `SUPABASE_URL`: Your project URL
+- `SUPABASE_ANON_KEY`: Public anon key for client
+- `SUPABASE_SERVICE_ROLE_KEY`: Service role key for server
+
+To set these in Replit:
+1. Click on "Tools" in the left sidebar
+2. Select "Secrets"
+3. Add each environment variable
+
+### 3. Database Schema Setup
+Run these SQL commands in your Supabase SQL editor:
+
+```sql
+-- Users table
+create table users (
+  id serial primary key,
+  username text not null unique,
+  password text not null
+);
+
+-- Doors table
+create table doors (
+  id serial primary key,
+  name text not null,
+  description text not null,
+  price integer not null,
+  price_category text not null,
+  wood_type text not null,
+  style text not null,
+  origin text not null,
+  dimensions text not null,
+  image_url text not null,
+  additional_images jsonb default '[]'::jsonb,
+  features jsonb default '[]'::jsonb,
+  details text
+);
+
+-- Collections table
+create table collections (
+  id serial primary key,
+  name text not null,
+  description text not null,
+  image_url text not null,
+  featured boolean default false
+);
+
+-- Testimonials table
+create table testimonials (
+  id serial primary key,
+  name text not null,
+  title text not null,
+  content text not null,
+  rating integer not null,
+  avatar_url text not null
+);
+
+-- Contact submissions table
+create table contact_submissions (
+  id serial primary key,
+  name text not null,
+  email text not null,
+  phone text not null,
+  message text not null,
+  created_at text not null
+);
+
+-- Row Level Security (RLS) Policies
+alter table users enable row level security;
+alter table doors enable row level security;
+alter table collections enable row level security;
+alter table testimonials enable row level security;
+alter table contact_submissions enable row level security;
+
+-- Public access policies
+create policy "Public doors access"
+  on doors for select
+  to public
+  using (true);
+
+create policy "Public collections access"
+  on collections for select
+  to public
+  using (true);
+
+create policy "Public testimonials access"
+  on testimonials for select
+  to public
+  using (true);
+
+-- Authenticated access policies
+create policy "Auth users can create contact submissions"
+  on contact_submissions for insert
+  to authenticated
+  with check (true);
+
+create policy "Admin can manage all tables"
+  on doors for all
+  to authenticated
+  using (auth.role() = 'service_role')
+  with check (auth.role() = 'service_role');
+```
+
+### 4. Authentication Setup
+In your Supabase dashboard:
+1. Go to Authentication → Settings
+2. Enable Email auth provider
+3. Configure email templates (optional)
+4. Set up email confirmation and password recovery URLs
+
+### 5. Storage Setup
+1. Create new storage bucket:
+   - Go to Storage in Supabase dashboard
+   - Create a new bucket called 'door-images'
+   - Set bucket to public
+2. Create storage policies:
+   ```sql
+   -- Allow public read access
+   create policy "Public read access"
+   on storage.objects for select
+   to public
+   using ( bucket_id = 'door-images' );
+
+   -- Allow authenticated uploads
+   create policy "Authenticated can upload"
+   on storage.objects for insert
+   to authenticated
+   with check ( bucket_id = 'door-images' );
+   ```
+
+### 6. Testing the Setup
+1. Test authentication:
+   ```typescript
+   const { data, error } = await supabase.auth.signUp({
+     email: 'test@example.com',
+     password: 'password123'
+   });
+   ```
+
+2. Test database access:
+   ```typescript
+   const { data, error } = await supabase
+     .from('doors')
+     .select('*')
+     .limit(1);
+   ```
+
+### 7. Monitoring & Maintenance
+- Monitor database usage in Supabase Dashboard
+- Set up logging and error tracking
+- Regularly backup important data
+- Monitor API usage and performance
+
+
 - **Frontend**: React, TypeScript, Tailwind CSS, Shadcn/UI
 - **Backend**: Express.js, Node.js
 - **Database**: PostgreSQL with Drizzle ORM
